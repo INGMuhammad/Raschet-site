@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Расчет-Raschet - Строительная компания</title>
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg: #fff;
+  --text: #111;
+  --border: #000;
+  --header-bg: #000;
+  --header-text: #fff;
+  --button-bg: #000;
+  --button-text: #fff;
+}
+
+body.dark {
+  --bg: #111;
+  --text: #f4f4f4;
+  --border: #f4f4f4;
+  --header-bg: #222;
+  --header-text: #f4f4f4;
+  --button-bg: #f4f4f4;
+  --button-text: #111;
+}
+
+header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 20px 10%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav a {
+  margin-left: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--header-text);
+}
+.theme-toggle, .lang-toggle, .contact-btn {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 8px 6px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+.theme-toggle:hover, .lang-toggle:hover, .contact-btn:hover {
+  background: var(--button-text);
+  color: var(--button-bg);
+}
+
+main {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+section {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 2px solid var(--border);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="title">Расчет</h1>
+  <nav>
+    <a href="#about" id="navAbout">О компании</a>
+    <a href="#services" id="navServices">Услуги</a>
+    <a href="#contacts" id="navContacts">Контакты</a>
+  </nav>
+  <div>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+    <button class="lang-toggle" id="langToggle">EN</button>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <h2 id="aboutTitle">О компании</h2>
+    <p id="aboutText1">Расчет — эксперт в строительстве фундаментов и подвалов с 2009 года.</p>
+    <p id="aboutText2">Наша миссия — строить надёжно и прозрачно, предоставляя клиентам полный контроль и гарантию качества.</p>
+  </section>
+
+  <section id="services">
+    <h2 id="servicesTitle">Наши услуги</h2>
+    <ul class="services-list" id="servicesList">
+      <li>Проектирование фундаментов</li>
+      <li>Строительство фундаментов ТИСЭ, ленточных, свайно-ленточных, плитных</li>
+      <li>Устройство утеплённых шведских плит (УШП)</li>
+      <li>Возведение подвалов и цокольных этажей</li>
+      <li>Строительство стен из газобетона и керамического блока</li>
+    </ul>
+  </section>
+
+  <section id="contacts">
+    <h2 id="contactsTitle">Контакты</h2>
+    <p id="phone">📞 Телефон: <a href="tel:+79379370111">+7 (937) 937-01-11</a></p>
+    <p id="email">📧 Email: <a href="mailto:raschet06@mail.ru">raschet06@mail.ru</a></p>
+    <p id="address">🏢 Адрес: 386203, Республика Ингушетия, г. Сунжа, ул Висаитова, д. 1, этаж 3 к./помещ. 1/37 </p>
+    <p id="hours">⏰ Время работы: Пн–Вс, 10:00–20:00</p>
+
+    <!-- ✉️ КНОПКИ СВЯЗИ -->
+    <div style="margin-top: 20px;">
+      <a href="mailto:raschet06@mail.ru" class="contact-btn">📩 Отправить сообщение</a>
+      <a href="tel:+79379370111" class="contact-btn">📞 Позвонить</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Расчет. Все права защищены.
+</footer>
+
+<script>
+// ======== ТЕМНАЯ / СВЕТЛАЯ ТЕМА ========
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+if (localStorage.getItem('theme') === 'dark') {
+  body.classList.add('dark');
+  themeToggle.textContent = '☀️';
+}
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  const dark = body.classList.contains('dark');
+  themeToggle.textContent = dark ? '☀️' : '🌙';
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+});
+
+// ======== ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА ========
+const langToggle = document.getElementById('langToggle');
+let currentLang = localStorage.getItem('lang') || 'ru';
+applyLanguage(currentLang);
+
+langToggle.addEventListener('click', () => {
+  currentLang = currentLang === 'ru' ? 'en' : 'ru';
+  applyLanguage(currentLang);
+  localStorage.setItem('lang', currentLang);
+});
+
+function applyLanguage(lang) {
+  const dict = {
+    ru: {
+      navAbout: 'О компании',
+      navServices: 'Услуги',
+      navContacts: 'Контакты',
+      aboutTitle: 'О компании',
+      aboutText1: 'Расчет — эксперт в строительстве фундаментов и подвалов с 2009 года.',
+      aboutText2: 'Наша миссия — строить надёжно и прозрачно, предоставляя клиентам полный контроль и гарантию качества.',
+      servicesTitle: 'Наши услуги',
+      servicesList: [
+        'Проектирование фундаментов',
+        'Строительство фундаментов ТИСЭ, ленточных, свайно-ленточных, плитных',
+        'Устройство утеплённых шведских плит (УШП)',
+        'Возведение подвалов и цокольных этажей',
+        'Строительство стен из газобетона и керамического блока'
+      ],
+      contactsTitle: 'Контакты',
+      phone: '📞 Телефон: <a href="tel:+79379370111">+7 (937) 937-01-11</a>',
+      email: '📧 Email: <a href="mailto:raschet06@mail.ru">raschet06@mail.ru</a>',
+      address: '🏢 Адрес: 386203, Республика Ингушетия, г. Сунжа, ул Висаитова, д. 1, этаж 3 к./помещ. 1/37',
+      hours: '⏰ Время работы: Пн–Вс, 10:00–20:00',
+      langButton: 'EN'
+    },
+    en: {
+      navAbout: 'About',
+      navServices: 'Services',
+      navContacts: 'Contacts',
+      aboutTitle: 'About Us',
+      aboutText1: 'Raschet — an expert in foundation and basement construction since 2009.',
+      aboutText2: 'Our mission is to build reliably and transparently, giving clients full control and quality assurance.',
+      servicesTitle: 'Our Services',
+      servicesList: [
+        'Foundation design',
+        'Construction of TISE, strip, pile-strip, and slab foundations',
+        'Installation of insulated Swedish slabs (ISS)',
+        'Basement and ground floor construction',
+        'Construction of aerated concrete and ceramic block walls'
+      ],
+      contactsTitle: 'Contacts',
+      phone: '📞 Phone: <a href="tel:+79379370111">+7 (937) 937-01-11</a>',
+      email: '📧 Email: <a href="mailto:raschet06@mail.ru">raschet06@mail.ru</a>',
+      address: '🏢 Address: 386203, Republic of Ingushetia, Sunzha, Visaitova str., 1, floor 3/room. 1/37',
+      hours: '⏰ Working hours: Mon-Sun, 10:00-20:00',
+      langButton: 'RU'
+    }
+  };
+
+  const t = dict[lang];
+  document.getElementById('navAbout').textContent = t.navAbout;
+  document.getElementById('navServices').textContent = t.navServices;
+  document.getElementById('navContacts').textContent = t.navContacts;
+  document.getElementById('aboutTitle').textContent = t.aboutTitle;
+  document.getElementById('aboutText1').textContent = t.aboutText1;
+  document.getElementById('aboutText2').textContent = t.aboutText2;
+  document.getElementById('servicesTitle').textContent = t.servicesTitle;
+  document.getElementById('contactsTitle').textContent = t.contactsTitle;
+  document.getElementById('phone').innerHTML = t.phone;
+  document.getElementById('email').innerHTML = t.email;
+  document.getElementById('address').innerHTML = t.address;
+  document.getElementById('hours').innerHTML = t.hours;
+  document.getElementById('langToggle').textContent = t.langButton;
+
+  const list = document.getElementById('servicesList');
+  list.innerHTML = '';
+  t.servicesList.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    list.appendChild(li);
+  });
+}
+</script>
+</body>
+</html>
+<!-- Кнопки службы поддержки -->
+<div class="support-buttons">
+  <a href="https://t.me/Walker345" class="support-btn telegram" target="_blank" title="Написать в Telegram">💬</a>
+  <a href="https://wa.me/79379370111" class="support-btn whatsapp" target="_blank" title="Написать в WhatsApp">📱</a>
+</div>
+
+<style>
+.support-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+}
+
+.support-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.support-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.support-btn.telegram {
+  background-color: #0088cc;
+}
+
+.support-btn.whatsapp {
+  background-color: #25D366;
+}
+</style>
